@@ -1,9 +1,8 @@
-import kotlin.random.Random
-
 fun main() {
-    val post = Post()
-    val newPost = Post()
-        WallService.add(newPost)
-    println(post)
-    println(newPost)
+    WallService.add(Post(45, "про", "еоу"))
+    WallService.add(Post(22, "кен", "ах2"))
+    WallService.add(Post(65, "rom", "Ok"))
+    for (post in WallService.posts) {
+        println(post)
+    }
 }
