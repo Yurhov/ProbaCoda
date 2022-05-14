@@ -1,8 +1,7 @@
 fun main() {
-    WallService.add(Post(45, "про", "еоу"))
-    WallService.add(Post(22, "кен", "ах2"))
-    WallService.add(Post(65, "rom", "Ok"))
-    for (post in WallService.posts) {
-        println(post)
-    }
+    WallService.add(Post( 0,"про", "еоу"))
+    WallService.add(Post( 0,"кен", "ах2"))
+    WallService.add(Post( 0,"rom", "Ok"))
+    WallService.add(Post())
+    println( WallService.posts[1].activities[0])
 }

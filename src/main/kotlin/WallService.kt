@@ -5,6 +5,7 @@ object WallService {
         val newPost = post.copy(id = postId)
         posts += newPost
         postId++
+        println(newPost)
         return posts.last()
     }
 }
