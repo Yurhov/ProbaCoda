@@ -1,12 +1,11 @@
-data class Post(
-    val id: Int = 0,
-    val nik: String = "ник",
-    val text: String = "текст"
-) {
-    var activities = arrayOf("Walks")
-    var gaf = "dfa"
+data class Post(val id: Int = 0, val text: String = "текст") {
+
     init {
         if (id != 0)
-        println("New post")
+            println("Новый пост создан")
+    }
+
+    override fun toString(): String {
+        return "$text №$id"
     }
 }
