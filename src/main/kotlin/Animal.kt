@@ -1,21 +1,26 @@
-open class Animal {
-    open val image = ""
-    open val food = ""
-    open val habitat = ""
+interface Roamable {
+    fun roam()
+}
+
+abstract class Animal : Roamable {
+    abstract val image: String
+    abstract val food: String
+    abstract val habitat: String
     open var hunger = 10
-    open fun makeNoise() {
-        println("The Animal is making a noise")
-    }
-    open fun eat() {
-        println("The Animal is eating")
-    }
-    open fun roam() {
+
+    abstract fun makeNoise()
+
+    abstract fun eat()
+
+    override fun roam() {
         println("The Animal is roaming")
     }
+
     fun sleep() {
         println("The Animal is sleeping")
     }
 }
+
 class Hippo : Animal() {
     override val image = "hippo.jpg"
     override val food = "grass"
@@ -23,15 +28,18 @@ class Hippo : Animal() {
     override fun makeNoise() {
         println("Grunt! Grunt!")
     }
+
     override fun eat() {
         println("The Hippo is eating $food")
     }
 }
-open class Canine : Animal() {
+
+abstract class Canine : Animal() {
     override fun roam() {
         println("The Canine is roaming")
     }
 }
+
 class Wolf : Canine() {
     override val image = "wolf.jpg"
     override val food = "meat"
@@ -39,17 +47,26 @@ class Wolf : Canine() {
     override fun makeNoise() {
         println("Hooooowl!")
     }
+
     override fun eat() {
         println("The Wolf is eating $food")
     }
 }
+
+class Vehicle : Roamable {
+    override fun roam() {
+        println("The Vehicle is roaming")
+    }
+}
+
 class Vet {
     fun giveShot(animal: Animal) {
 //Code to do something medical
         animal.makeNoise()
     }
 }
-fun main(args: Array<String>) {
+
+fun main () {
     val animals = arrayOf(Hippo(), Wolf())
     for (item in animals) {
         item.roam()
@@ -60,4 +77,12 @@ fun main(args: Array<String>) {
     val hippo = Hippo()
     vet.giveShot(wolf)
     vet.giveShot(hippo)
+
+    val roamables = arrayOf(Hippo(), Wolf(), Vehicle())
+    for (item in roamables) {
+        item.roam()
+        if (item is Animal) {
+            item.eat()
+        }
+    }
 }
