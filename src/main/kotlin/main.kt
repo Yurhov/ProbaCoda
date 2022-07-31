@@ -1,44 +1,58 @@
-import kotlin.math.max
-
 fun main() {
-    val collection = mutableMapOf("x" to 1, "y" to 2, "z" to 3)
-    for ((key, value) in collection) {
-        println("Key is $key, value is $value")
+    fun convert(
+        x: Double,
+        converter: (Double) -> Double
+    ): Double {
+        val result = converter(x)
+        println("$x конвертировались в $result")
+        return result
     }
-    println(collection.containsKey("x"))
-    println(collection.containsValue(2))
-    println(collection.get("y"))
-    println(collection["a"])
-    println(collection.getValue("z"))
-    println(collection.entries)
-    println(collection.keys)
-    println(collection.values)
-    println(collection.size)
-    println(collection.isEmpty())
 
-//    collection.put("a", 4)
-//    collection["b"] = 5
-//    println(collection.entries)
-//
-//    val otherCollection = mapOf("c" to 6, "d" to 7)
-//    collection.putAll(otherCollection)
-//    println(collection.entries)
-//
-//    collection.remove("x")
-//    collection.remove("z", 4)
-//    println(collection.entries)
+    fun convertFive(converter: (Int) -> Double): Double {
+        val result = converter(5)
+        println("5 конвертировалось в  $result")
+        return result
+    }
 
-    val collectionList = collection.toList()
-    println(collectionList)
+    val cConvToFar = { x: Double ->
+        println("Переводим градусы по цельсию в градусы по фаренгейту")
+        x * 1.8 + 32
+    }
+    val poundsConvToKg = { x: Double ->
+        println("Переводим фунты в килограммы")
+        x / 2.204623
+    }
+    convert(45.8, cConvToFar)
+    convert(32.8, poundsConvToKg)
+    convert(45.4) { it * 3 + 25 }
+    convertFive { it + 5.6 }
+    println(
+        "Выберите операцию:\n" +
+                "1) Перевод градусов цельсия в градусы Фаренгейта\n" +
+                "2) Перевод килограммов в фунты\n" +
+                "3) Перевод фунтов в европейские тонны"
+    )
+    val a = readLine()?.toInt() ?: return
+    println("Введите переводимую величину")
+    val x = readLine()?.toDouble() ?: return
 
-    val collectionSet = collection.values.toSet()
-    println(collectionSet)
 
-//   collection.clear()
-    println(collection.isEmpty())
-    println(collection.values.random())
-    println(collection.values.maxOrNull())
-    println(collection.keys.minOrNull())
+    val result = when (a) {
+        1 -> {
+            println("Перевод градусов цельсия в градусы Фаренгейта")
+            x * 1.8 + 32
+        }
+        2 -> {
+            println("Перевод килограммов в фунты")
+            x * 2.204623
+        }
+        3 -> {
+            println("Перевод фунтов в европейские тонны")
+            x / 2000.0
+        }
+        else -> {
+            x
+        }
+    }
+    println("$x конвертированы в $result")
 }
-
-
